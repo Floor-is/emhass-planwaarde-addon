@@ -1,4 +1,4 @@
-# Kopie van de officiële EMHASS-add-on (davidusb-geek/emhass-add-on, emhass/config.yml @ v0.18.3),
+# Kopie van de officiële EMHASS-add-on (davidusb-geek/emhass-add-on, emhass/config.yml @ v0.18.3, versie gevolgd tot v0.18.4),
 # met drie bewuste afwijkingen zodat hij NAAST de officiële add-on kan draaien:
 #   1. eigen slug, naam en image (ghcr.io/floor-is/emhass, gebouwd uit de fork Floor-is/emhass);
 #   2. hostpoort 5001 in plaats van 5000 (de officiële add-on houdt 5000);
@@ -9,7 +9,7 @@
 name: EMHASS planwaarde
 description: EMHASS-fork met eindwaarde van de accu en waarde per kWh in een deferrable load
 url: https://github.com/Floor-is/emhass/blob/planwaarde/PLANWAARDE.md
-version: v0.18.3-planwaarde.1
+version: v0.18.4-planwaarde.1
 slug: emhass_planwaarde
 arch:
   - aarch64
