@@ -6,6 +6,7 @@
 #      opt_res_latest.csv in /share/emhass; deze add-on kan daar niet bij. Met config_path
 #      "default" verplaatst EMHASS een /share/config.json naar zijn eigen /config — ook dat
 #      kan zonder /share niet gebeuren.
+#   4. zonder `webui` en `hassio_role: default` (add-on-linter: overbodig naast ingress / standaardwaarde).
 name: EMHASS planwaarde
 description: EMHASS-fork met eindwaarde van de accu en waarde per kWh in een deferrable load
 url: https://github.com/Floor-is/emhass/blob/planwaarde/PLANWAARDE.md
@@ -19,13 +20,11 @@ ports:
   5000/tcp: 5001
 ports_description:
   5000/tcp: Web interface and API
-webui: http://[HOST]:[PORT:5000]
 map:
   - type: addon_config
     path: /config
     read_only: False
 init: false
-hassio_role: default
 homeassistant_api: true
 ingress: true
 ingress_port: 5000
