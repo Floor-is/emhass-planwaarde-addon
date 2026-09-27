@@ -1,8 +1,8 @@
-# Faalt hard als config.yml niet deugt of als het image:version waar hij naar wijst niet
-# bestaat voor beide architecturen. De add-on zelf bouwt niets; het image komt uit
-# Floor-is/emhass (workflow "PLANWAARDE image"), zoals de officiële add-on het zijne uit
-# davidusb-geek/emhass haalt.
-name: controle
+# Fails hard if config.yml is invalid or if the image:version it points to does not exist
+# for both architectures. The add-on builds nothing itself; the image comes from
+# Floor-is/emhass (workflow "PLANWAARDE image"), just as the official add-on takes its image
+# from davidusb-geek/emhass.
+name: check
 on:
   push:
   pull_request:
@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: image:version bestaat voor aarch64 en amd64
+      - name: image:version exists for aarch64 and amd64
         run: |
           img=$(yq -r .image emhass_planwaarde/config.yml)
           ver=$(yq -r .version emhass_planwaarde/config.yml)
-          echo "controleer $img:$ver"
+          echo "checking $img:$ver"
           docker buildx imagetools inspect "$img:$ver" --format '{{json .Manifest}}' > manifest.json
           jq -e '[.manifests[].platform | "\(.os)/\(.architecture)"] | index("linux/arm64") and index("linux/amd64")' manifest.json

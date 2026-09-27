@@ -1,16 +1,15 @@
-# Kopie van de officiële EMHASS-add-on (davidusb-geek/emhass-add-on, emhass/config.yml @ v0.18.3, versie gevolgd tot v0.18.4),
-# met drie bewuste afwijkingen zodat hij NAAST de officiële add-on kan draaien:
-#   1. eigen slug, naam en image (ghcr.io/floor-is/emhass, gebouwd uit de fork Floor-is/emhass);
-#   2. hostpoort 5001 in plaats van 5000 (de officiële add-on houdt 5000);
-#   3. geen map naar /share. De officiële add-on bewaart config.json, params.pkl en
-#      opt_res_latest.csv in /share/emhass; deze add-on kan daar niet bij. Met config_path
-#      "default" verplaatst EMHASS een /share/config.json naar zijn eigen /config — ook dat
-#      kan zonder /share niet gebeuren.
-#   4. zonder `webui` en `hassio_role: default` (add-on-linter: overbodig naast ingress / standaardwaarde).
+# Copy of the official EMHASS add-on (davidusb-geek/emhass-add-on, emhass/config.yml @ v0.18.3, version
+# followed up to v0.18.4), with deliberate deviations so it can run ALONGSIDE the official add-on:
+#   1. its own slug, name and image (ghcr.io/floor-is/emhass, built from the fork Floor-is/emhass);
+#   2. host port 5001 instead of 5000 (the official add-on keeps 5000);
+#   3. no map to /share. The official add-on keeps config.json, params.pkl and opt_res_latest.csv in
+#      /share/emhass; this add-on cannot reach them. With config_path "default", EMHASS moves a
+#      /share/config.json into its own /config; without /share that cannot happen either;
+#   4. no `webui` and no `hassio_role: default` (add-on linter: redundant with ingress / default value).
 name: EMHASS planwaarde
-description: EMHASS-fork met eindwaarde van de accu en waarde per kWh in een deferrable load
+description: EMHASS fork with a terminal value for the battery and a value per kWh for a deferrable load
 url: https://github.com/Floor-is/emhass
-version: v0.18.4-planwaarde.1
+version: v0.18.4-planwaarde.2
 slug: emhass_planwaarde
 arch:
   - aarch64

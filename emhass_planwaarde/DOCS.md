@@ -1,31 +1,34 @@
 # EMHASS planwaarde
 
-Deze add-on draait [Floor-is/emhass](https://github.com/Floor-is/emhass), tak `planwaarde`: EMHASS met drie
-extra runtime-parameters. Zonder die parameters gedraagt hij zich als de upstream-versie in het versienummer
-(`v0.18.4-planwaarde.1` = EMHASS v0.18.4).
+This add-on runs [Floor-is/emhass](https://github.com/Floor-is/emhass), branch `planwaarde`: EMHASS with three
+extra runtime parameters. Without those parameters it behaves like the upstream version in the version number
+(`v0.18.4-planwaarde.2` = EMHASS v0.18.4). For EMHASS itself, see
+[davidusb-geek/emhass](https://github.com/davidusb-geek/emhass) and the official
+[add-on](https://github.com/davidusb-geek/emhass-add-on).
 
-| parameter | eenheid | wat |
+| parameter | unit | what it does |
 |---|---|---|
-| `battery_terminal_value` | EUR/kWh | geen vaste eindstand; energie aan het eind van de horizon is zoveel waard (0 = vrij tot de vloer) |
-| `deferrable_load_energy_max` | Wh per load | eis wordt `eis <= E <= max`; de eis is de vloer |
-| `deferrable_load_value` | EUR/kWh per load | elke kWh in de load is zoveel waard |
+| `battery_terminal_value` | EUR/kWh | no fixed end state; energy left at the end of the horizon is worth this much (0 = free down to the minimum) |
+| `deferrable_load_energy_max` | Wh per load | the requirement becomes `requirement <= E <= max`; the requirement is the floor |
+| `deferrable_load_value` | EUR/kWh per load | every kWh into the load is worth this much |
 
-## Naast de officiële add-on
+An unreachable requirement does not make the plan infeasible: column `deferrable<k>_shortfall_wh` shows the
+shortfall. Details on the [fork's front page](https://github.com/Floor-is/emhass).
 
-- ⚠️ Zet `continual_publish: false` in de `config.json` van deze add-on als hij naast de officiële draait.
-  Beide publiceren anders onder dezelfde sensornamen (`sensor.p_batt_forecast`, …) en overschrijven elkaar.
-  Roep om dezelfde reden `publish-data` niet aan op deze add-on zolang de officiële de sturing levert.
-- Een onhaalbare eis maakt het plan niet infeasible: kolom `deferrable<k>_tekort_wh` toont het tekort.
+## Alongside the official add-on
 
-- Poort **5001** op de host (de officiële add-on houdt 5000). Via ingress werkt de web-UI ook.
-- Config en data staan in `addon_configs/<slug>/` (`/config` in de container). `/share` is niet gemapt:
-  de officiële add-on bewaart zijn `config.json`, `params.pkl` en resultaten in `/share/emhass`, en deze
-  add-on kan daar niet bij.
-- Zet vóór de eerste start een `config.json` in `addon_configs/<slug>/`. Zonder dat bestand start EMHASS
-  met zijn fabriekswaarden.
+- ⚠️ Set `continual_publish: false` in this add-on's `config.json` when it runs next to the official one.
+  Otherwise both publish under the same sensor names (`sensor.p_batt_forecast`, …) and overwrite each other.
+  For the same reason, do not call `publish-data` on this add-on while the official one drives your system.
+- Port **5001** on the host (the official add-on keeps 5000). The web UI also works through ingress.
+- Config and data live in `addon_configs/<slug>/` (`/config` inside the container). `/share` is not mapped:
+  the official add-on keeps its `config.json`, `params.pkl` and results in `/share/emhass`, and this add-on
+  cannot reach them.
+- Put a `config.json` in `addon_configs/<slug>/` before the first start. Without it EMHASS starts with its
+  factory defaults.
 
 ## Updates
 
-De versie wijst naar een vaste fork-tag. Een nieuwe upstream-release komt niet vanzelf binnen: de fork
-herbaseert dagelijks (workflow `PLANWAARDE upstream-wacht`) en wordt rood als de patch niet meer past of niet
-meer werkt. Een nieuwe add-on-versie vraagt een nieuwe fork-tag en een versiewijziging hier.
+The version points to a fixed fork tag. A new upstream release does not arrive by itself: the fork rebases
+daily (workflow `PLANWAARDE upstream watch`) and turns red if the patch no longer applies or no longer works.
+A new add-on version needs a new fork tag and a version change here.
