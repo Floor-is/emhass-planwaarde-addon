@@ -1,0 +1,54 @@
+# Kopie van de officiële EMHASS-add-on (davidusb-geek/emhass-add-on, emhass/config.yml @ v0.18.3),
+# met drie bewuste afwijkingen zodat hij NAAST de officiële add-on kan draaien:
+#   1. eigen slug, naam en image (ghcr.io/floor-is/emhass, gebouwd uit de fork Floor-is/emhass);
+#   2. hostpoort 5001 in plaats van 5000 (de officiële add-on houdt 5000);
+#   3. geen map naar /share. De officiële add-on bewaart config.json, params.pkl en
+#      opt_res_latest.csv in /share/emhass; deze add-on kan daar niet bij. Met config_path
+#      "default" verplaatst EMHASS een /share/config.json naar zijn eigen /config — ook dat
+#      kan zonder /share niet gebeuren.
+name: EMHASS planwaarde
+description: EMHASS-fork met eindwaarde van de accu en waarde per kWh in een deferrable load
+url: https://github.com/Floor-is/emhass/blob/planwaarde/PLANWAARDE.md
+version: v0.18.3-planwaarde.1
+slug: emhass_planwaarde
+arch:
+  - aarch64
+  - amd64
+image: "ghcr.io/floor-is/emhass"
+ports:
+  5000/tcp: 5001
+ports_description:
+  5000/tcp: Web interface and API
+webui: http://[HOST]:[PORT:5000]
+map:
+  - type: addon_config
+    path: /config
+    read_only: False
+init: false
+hassio_role: default
+homeassistant_api: true
+ingress: true
+ingress_port: 5000
+ingress_stream: true
+panel_icon: mdi:home-lightning-bolt-outline
+panel_title: EMHASS planwaarde
+options:
+  data_path: /config
+  config_path: /config/config.json
+schema:
+  hass_url: "str?" #optional
+  long_lived_token: "password?" #optional
+  data_path: "list(/config|/data)"
+  config_path: "list(/config/config.json)"
+  time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
+  Latitude: "float?" #optional
+  Longitude: "float?" #optional
+  Altitude: "float?" #optional
+  solcast_api_key: "password?" #optional
+  solcast_rooftop_id: "str?" #optional
+  solar_forecast_kwp: "float?" #optional
+  server_ip: "list(0.0.0.0|127.0.0.1)?" #optional
+  influxdb_username: "str?" #optional
+  influxdb_password: "password?" #optional
+  victoriametrics_username: "str?" #optional
+  victoriametrics_password: "password?" #optional

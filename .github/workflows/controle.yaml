@@ -1,0 +1,28 @@
+# Faalt hard als config.yml niet deugt of als het image:version waar hij naar wijst niet
+# bestaat voor beide architecturen. De add-on zelf bouwt niets; het image komt uit
+# Floor-is/emhass (workflow "PLANWAARDE image"), zoals de officiële add-on het zijne uit
+# davidusb-geek/emhass haalt.
+name: controle
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: frenck/action-addon-linter@v2
+        with:
+          path: "./emhass_planwaarde"
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: image:version bestaat voor aarch64 en amd64
+        run: |
+          img=$(yq -r .image emhass_planwaarde/config.yml)
+          ver=$(yq -r .version emhass_planwaarde/config.yml)
+          echo "controleer $img:$ver"
+          docker buildx imagetools inspect "$img:$ver" --format '{{json .Manifest}}' > manifest.json
+          jq -e '[.manifests[].platform | "\(.os)/\(.architecture)"] | index("linux/arm64") and index("linux/amd64")' manifest.json
