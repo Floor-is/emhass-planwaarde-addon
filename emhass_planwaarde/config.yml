@@ -9,7 +9,7 @@
 #   4. zonder `webui` en `hassio_role: default` (add-on-linter: overbodig naast ingress / standaardwaarde).
 name: EMHASS planwaarde
 description: EMHASS-fork met eindwaarde van de accu en waarde per kWh in een deferrable load
-url: https://github.com/Floor-is/emhass/blob/planwaarde/PLANWAARDE.md
+url: https://github.com/Floor-is/emhass
 version: v0.18.4-planwaarde.1
 slug: emhass_planwaarde
 arch:
