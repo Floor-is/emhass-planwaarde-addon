@@ -2,7 +2,7 @@
 
 This add-on runs [Floor-is/emhass](https://github.com/Floor-is/emhass), branch `planwaarde`: EMHASS with three
 extra runtime parameters. Without those parameters it behaves like the upstream version in the version number
-(`v0.18.4-planwaarde.2` = EMHASS v0.18.4). For EMHASS itself, see
+(`v0.18.4-planwaarde.3` = EMHASS v0.18.4). For EMHASS itself, see
 [davidusb-geek/emhass](https://github.com/davidusb-geek/emhass) and the official
 [add-on](https://github.com/davidusb-geek/emhass-add-on).
 
@@ -16,6 +16,9 @@ An unreachable requirement does not make the plan infeasible: column `deferrable
 shortfall. Details on the [fork's front page](https://github.com/Floor-is/emhass).
 
 ## Alongside the official add-on
+
+- Set `method_ts_round: "first"` in this add-on's `config.json`. With `"nearest"` every runtime input (prices, PV,
+  load) sits one step late under the plan labels when an optimisation runs in the second half of a time step.
 
 - ⚠️ Set `continual_publish: false` in this add-on's `config.json` when it runs next to the official one.
   Otherwise both publish under the same sensor names (`sensor.p_batt_forecast`, …) and overwrite each other.
