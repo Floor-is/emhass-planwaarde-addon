@@ -2,7 +2,7 @@
 
 This add-on runs [Floor-is/emhass](https://github.com/Floor-is/emhass), branch `planwaarde`: EMHASS with three
 extra runtime parameters. Without those parameters it behaves like the upstream version in the version number
-(`v0.18.4-planwaarde.3` = EMHASS v0.18.4). For EMHASS itself, see
+(`v0.18.4-planwaarde.4` = EMHASS v0.18.4). For EMHASS itself, see
 [davidusb-geek/emhass](https://github.com/davidusb-geek/emhass) and the official
 [add-on](https://github.com/davidusb-geek/emhass-add-on).
 
