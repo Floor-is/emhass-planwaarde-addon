@@ -9,7 +9,7 @@
 name: EMHASS planwaarde
 description: EMHASS fork with a terminal value for the battery and a value per kWh for a deferrable load
 url: https://github.com/Floor-is/emhass
-version: v0.18.4-planwaarde.4
+version: v0.18.4-planwaarde.5
 slug: emhass_planwaarde
 arch:
   - aarch64
